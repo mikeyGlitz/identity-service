@@ -1,0 +1,85 @@
+buildscript {
+    ext.kotlin_version = '1.2.40'
+    ext.spek_version = '1.1.5'
+
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:0.9.16'
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
+        classpath 'gradle.plugin.org.jmailen.gradle:kotlinter-gradle:1.11.2'
+
+        // Spring dependencies
+        // Dependency-Management plugin will manage spring dependencies with profile
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.1.RELEASE'
+        classpath 'io.spring.gradle:dependency-management-plugin:0.4.0.RELEASE'
+    }
+}
+
+group projectGroup
+version projectVersion
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'jacoco'
+apply plugin: 'org.junit.platform.gradle.plugin'
+apply plugin: 'org.jmailen.kotlinter'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.data:spring-data-releasetrain:Kay-SR6'
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.data:spring-data-ldap'
+    testCompile 'com.winterbe:expekt:0.5.0'
+    testCompile "org.jetbrains.spek:spek-api:$spek_version"
+    testCompile "org.jetbrains.spek:spek-junit-platform-engine:$spek_version"
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+jar {
+    manifest {
+        attributes 'Main-Class': projectMain
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+junitPlatform {
+    filters {
+        engines {
+            include 'spek'
+        }
+    }
+    // Enable for kotlin test coverage
+    // https://stackoverflow.com/questions/42717350/how-to-setup-jacoco-with-spek-in-a-multi-project
+    enableStandardTestTask true
+}
