@@ -1,0 +1,5 @@
+api:
+  host: ${ID_DB_HOST:localhost}
+  port: ${ID_DB_PORT:389}
+  base: ${ID_DB_BASE:dc=local,dc=net}
+  user: ${ID_DB_USER:cn=admin,dc=local,dc=net}
