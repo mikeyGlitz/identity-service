@@ -54,6 +54,7 @@ dependencies {
     testCompile "org.jetbrains.spek:spek-api:$spek_version"
     testCompile "org.jetbrains.spek:spek-junit-platform-engine:$spek_version"
     testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework.ldap:spring-ldap-test'
 }
 
 sourceCompatibility = '1.8'
