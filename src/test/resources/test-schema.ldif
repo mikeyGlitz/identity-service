@@ -1,0 +1,61 @@
+# dn: dc=example,dc=com
+# objectClass: top
+# objectClass: domain
+# objectClass: domainName
+# dc: example
+
+dn: ou=groups,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: groups
+
+dn: ou=people,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: people
+
+# Create people
+dn: cn=jdoe,ou=people,dc=example,dc=com
+objectClass: top
+objectClass: person
+objectClass: inetOrgPerson
+givenName: John
+sn: Doe
+mail: jdoe@example.com
+password: secret
+cn: jdoe
+
+dn: cn=jblow,ou=people,dc=example,dc=com
+objectClass: top
+objectClass: person
+objectClass: inetOrgPerson
+givenName: Joe
+sn: Blow
+mail: jblow@example.com
+password: secret
+cn: jblow
+
+dn: cn=jschmo,ou=people,dc=example,dc=com
+objectClass: top
+objectClass: person
+objectClass: inetOrgPerson
+givenName: Joe
+sn: schmo
+mail: jschmo@example.com
+password: secret
+cn: jschmo
+
+
+# Create groups
+dn: cn=joes,ou=groups,dc=example,dc=com
+objectClass: groupOfUniqueNames
+objectClass: top
+cn: joes
+uniqueMember: cn=jschmo,ou=people,dc=example,dc=net
+uniqueMember: cn=jblow,ou=people,dc=example,dc=net
+
+dn: cn=johns,ou=groups,dc=example,dc=com
+objectClass: groupOfUniqueNames
+objectClass: top
+cn: johns
+uniqueMember: cn=jdoe,ou=people,dc=example,dc=net

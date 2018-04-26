@@ -49,12 +49,18 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.ldap:spring-ldap-core'
     compile 'org.springframework.data:spring-data-ldap'
     testCompile 'com.winterbe:expekt:0.5.0'
     testCompile "org.jetbrains.spek:spek-api:$spek_version"
     testCompile "org.jetbrains.spek:spek-junit-platform-engine:$spek_version"
+    testCompile 'junit:junit:4.12'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.springframework.ldap:spring-ldap-test'
+    testCompile 'org.apache.directory.server:apacheds-core:1.5.5'
+    testCompile 'org.apache.directory.server:apacheds-core-entry:1.5.5'
+    testCompile 'org.apache.directory.server:apacheds-protocol-shared:1.5.5'
+    testCompile 'org.apache.directory.server:apacheds-server-jndi:1.5.5'
 }
 
 sourceCompatibility = '1.8'

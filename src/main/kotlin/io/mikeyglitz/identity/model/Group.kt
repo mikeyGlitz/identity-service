@@ -9,14 +9,22 @@ import javax.naming.Name
     base = "ou=groups",
     objectClasses = ["groupOfNames", "top"]
 )
-data class Group(
+class Group() {
     @Id
-    private var id: Name?,
+    lateinit var id: Name
 
     @Attribute(name = "cn")
-    var name: String,
+    lateinit var name: String
     @Attribute(name = "description")
-    var description: String?,
+    lateinit var description: String
     @Attribute(name = "member")
-    var members: Set<Name>
-)
+    var members: Set<Name> = emptySet()
+
+    constructor(name: String) : this() {
+        this.name = name
+    }
+
+    constructor(name: String, description: String) : this(name) {
+        this.description = description
+    }
+}

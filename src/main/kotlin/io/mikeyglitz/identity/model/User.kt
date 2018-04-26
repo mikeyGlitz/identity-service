@@ -9,18 +9,32 @@ import javax.naming.Name
     base = "ou=people",
     objectClasses = ["person", "inetOrgPerson", "top"]
 )
-data class User(
+class User() {
     @Id
-    private var id: Name?,
+    lateinit var id: Name
 
     @Attribute(name = "cn")
-    var username: String,
+    lateinit var username: String
     @Attribute(name = "password")
-    var password: String,
+    lateinit var password: String
     @Attribute(name = "givenName")
-    var firsName: String,
+    lateinit var firstName: String
     @Attribute(name = "sn")
-    var lastName: String,
+    lateinit var lastName: String
     @Attribute(name = "mail")
-    var email: String
-)
+    lateinit var email: String
+
+    constructor(
+        username: String,
+        password: String,
+        firstName: String,
+        lastName: String,
+        email: String
+    ) : this() {
+        this.username = username
+        this.password = password
+        this.email = email
+        this.lastName = lastName
+        this.firstName = firstName
+    }
+}
