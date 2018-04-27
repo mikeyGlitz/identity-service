@@ -32,13 +32,14 @@ class UserService {
         val user = repository.findByUsername(username)
         if (user != null) {
             if (password != null)
-                user.password = password
+                user.setPassword(password)
             if (email != null)
                 user.email = email
             if (firstName != null)
                 user.firstName = firstName
             if (lastName != null)
                 user.lastName = lastName
+            repository.save(user)
         }
     }
 

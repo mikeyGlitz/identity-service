@@ -64,4 +64,17 @@ class UserServiceTest {
         val user = found[0]
         expect(user).to.not.be.`null`
     }
+
+    @Test
+    fun updateUser() {
+        val username = "jdoe"
+        val email = "john.doe@example.com"
+        userService.update(username, null, null, null, email)
+
+        val found = userService.search(username)
+        expect(found).size.to.be.above(0)
+        val user = found[0]
+        expect(user.username).to.equal(username)
+        expect(user.email).to.equal(email)
+    }
 }

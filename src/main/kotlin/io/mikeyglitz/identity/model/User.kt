@@ -19,8 +19,8 @@ class User() {
     lateinit var username: String
     @Attribute(name = "cn")
     lateinit var fullName: String
-    @Attribute(name = "userPassword")
-    lateinit var password: String
+    @Attribute(name = "userPassword", type = Attribute.Type.BINARY)
+    lateinit var password: ByteArray
     @Attribute(name = "givenName")
     lateinit var firstName: String
     @Attribute(name = "sn")
@@ -36,10 +36,16 @@ class User() {
         email: String
     ) : this() {
         this.username = username
-        this.password = password
+        this.password = password.toByteArray(Charsets.UTF_8)
         this.email = email
         this.lastName = lastName
         this.firstName = firstName
         this.fullName = "$firstName $lastName"
     }
+
+    fun setPassword(password: String) {
+        this.password = password.toByteArray(Charsets.UTF_8)
+    }
+
+    fun getPassword(): String = password.toString(Charsets.UTF_8)
 }
