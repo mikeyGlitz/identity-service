@@ -1,6 +1,7 @@
 package io.mikeyglitz.identity.model
 
 import org.springframework.ldap.odm.annotations.Attribute
+import org.springframework.ldap.odm.annotations.DnAttribute
 import org.springframework.ldap.odm.annotations.Entry
 import org.springframework.ldap.odm.annotations.Id
 import javax.naming.Name
@@ -13,9 +14,12 @@ class User() {
     @Id
     lateinit var id: Name
 
-    @Attribute(name = "cn")
+    @Attribute(name = "uid")
+    @DnAttribute(value = "uid", index = 1)
     lateinit var username: String
-    @Attribute(name = "password")
+    @Attribute(name = "cn")
+    lateinit var fullName: String
+    @Attribute(name = "userPassword")
     lateinit var password: String
     @Attribute(name = "givenName")
     lateinit var firstName: String
@@ -36,5 +40,6 @@ class User() {
         this.email = email
         this.lastName = lastName
         this.firstName = firstName
+        this.fullName = "$firstName $lastName"
     }
 }

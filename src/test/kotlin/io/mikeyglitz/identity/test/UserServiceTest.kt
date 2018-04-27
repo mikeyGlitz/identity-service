@@ -25,9 +25,43 @@ class UserServiceTest {
     fun findUserTest() {
         val username = "jdoe"
         val users = userService.search(username)
-        expect(users.size).to.be.above(0)
+        expect(users).size.to.be.above(0)
         val user = users[0]
         expect(user).to.not.be.`null`
         expect(user.username).to.equal(username)
+    }
+
+    @Test
+    fun findNonExistantUser() {
+        val username = "swanson"
+        val found = userService.search(username)
+        expect(found).size.to.equal(0)
+    }
+
+    @Test
+    fun authenticateUserValidPassword() {
+        val username = "jdoe"
+        val password = "secret"
+        val authed = userService.authenticate(username, password)
+        expect(authed).to.be.`true`
+    }
+
+    @Test
+    fun authenticateUserBadPassword() {
+        val username = "jdoe"
+        val password = "not-a-real-password"
+        val authed = userService.authenticate(username, password)
+        expect(authed).to.be.`false`
+    }
+
+    @Test
+    fun createUser(){
+        val username = "ljenkins"
+        val password = "TEST"
+        userService.create(username, password, "Leeroy", "Jenkins", "ljenkins@blizzard.com")
+        val found = userService.search(username)
+        expect(found).size.to.be.above(0)
+        val user = found[0]
+        expect(user).to.not.be.`null`
     }
 }
