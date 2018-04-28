@@ -2,13 +2,17 @@ package io.mikeyglitz.identity.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.ldap.odm.annotations.Attribute
+import org.springframework.ldap.odm.annotations.DnAttribute
 import org.springframework.ldap.odm.annotations.Entry
 import org.springframework.ldap.odm.annotations.Id
 import javax.naming.Name
 
+/**
+ * A Data Access Object representing a LDAP Group entry
+ */
 @Entry(
     base = "ou=groups",
-    objectClasses = ["groupOfNames", "top"]
+    objectClasses = ["groupOfUniqueNames", "top"]
 )
 class Group() {
     @JsonIgnore
@@ -16,12 +20,12 @@ class Group() {
     lateinit var id: Name
 
     @Attribute(name = "cn")
+    @DnAttribute(value= "cn", index = 1)
     lateinit var name: String
     @Attribute(name = "description")
     lateinit var description: String
-    @JsonIgnore
-    @Attribute(name = "member")
-    var members: Set<Name> = emptySet()
+    @Attribute(name = "uniqueMember")
+    var members: MutableSet<Name> = HashSet()
 
     constructor(name: String) : this() {
         this.name = name

@@ -9,12 +9,23 @@ import org.springframework.ldap.core.ContextSource
 import org.springframework.ldap.core.LdapTemplate
 import org.springframework.ldap.core.support.LdapContextSource
 
+/**
+ * A configuration bean used to connect to the LDAP server
+ */
 @Configuration
 @EnableLdapRepositories
 class LdapServerConfig {
+    /**
+     * A map for the environment and Spring properties
+     */
     @Autowired
     private lateinit var environment: Environment
 
+    /**
+     * Sets up the context source so that the application
+     * can connect to the LDAP backend
+     * @return A configured context source to be used by Spring
+     */
     @Bean
     fun contextSource(): ContextSource {
         val host = environment.getRequiredProperty("api.host")
