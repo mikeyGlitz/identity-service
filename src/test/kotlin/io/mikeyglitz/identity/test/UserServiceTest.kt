@@ -1,7 +1,7 @@
 package io.mikeyglitz.identity.test
 
 import com.winterbe.expekt.expect
-import io.mikeyglitz.identity.config.TestConfig
+import io.mikeyglitz.identity.config.TestLdapServerConfig
 import io.mikeyglitz.identity.service.UserService
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,8 +14,8 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader
 
 @SpringBootTest
 @RunWith(SpringRunner::class)
-@ActiveProfiles("test")
-@ContextConfiguration(classes = [TestConfig::class],
+@ActiveProfiles("testIntegration")
+@ContextConfiguration(classes = [TestLdapServerConfig::class],
         loader = AnnotationConfigContextLoader::class)
 class UserServiceTest {
     @Autowired

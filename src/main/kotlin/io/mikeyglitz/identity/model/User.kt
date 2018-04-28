@@ -6,9 +6,17 @@ import org.springframework.ldap.odm.annotations.Entry
 import org.springframework.ldap.odm.annotations.Id
 import javax.naming.Name
 
+
+data class UserDisplay(
+    val username: String,
+    val email: String,
+    val firstName: String,
+    val lastName: String
+)
+
 @Entry(
-    base = "ou=people",
-    objectClasses = ["person", "inetOrgPerson", "top"]
+        base = "ou=people",
+        objectClasses = ["person", "inetOrgPerson", "top"]
 )
 class User() {
     @Id
@@ -48,4 +56,6 @@ class User() {
     }
 
     fun getPassword(): String = password.toString(Charsets.UTF_8)
+
+    fun toDisplay(): UserDisplay = UserDisplay(username, email, firstName, lastName)
 }

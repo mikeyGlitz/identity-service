@@ -1,3 +1,5 @@
+server:
+  port=${ID_PORT:9000}
 api:
   host: ${ID_DB_HOST:localhost}
   port: ${ID_DB_PORT:389}

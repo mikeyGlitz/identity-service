@@ -43,5 +43,5 @@ class UserService {
         }
     }
 
-    fun search(name: String): List<User> = repository.findByUsernameLikeIgnoreCase(name)
+    fun search(name: String?): List<User> = repository.findByUsernameLikeIgnoreCase(name?:"*")
 }

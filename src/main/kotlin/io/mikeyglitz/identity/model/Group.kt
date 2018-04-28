@@ -1,5 +1,6 @@
 package io.mikeyglitz.identity.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.ldap.odm.annotations.Attribute
 import org.springframework.ldap.odm.annotations.Entry
 import org.springframework.ldap.odm.annotations.Id
@@ -10,6 +11,7 @@ import javax.naming.Name
     objectClasses = ["groupOfNames", "top"]
 )
 class Group() {
+    @JsonIgnore
     @Id
     lateinit var id: Name
 
@@ -17,6 +19,7 @@ class Group() {
     lateinit var name: String
     @Attribute(name = "description")
     lateinit var description: String
+    @JsonIgnore
     @Attribute(name = "member")
     var members: Set<Name> = emptySet()
 

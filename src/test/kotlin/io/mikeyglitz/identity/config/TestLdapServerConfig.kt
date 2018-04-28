@@ -17,8 +17,8 @@ import org.springframework.ldap.test.TestContextSourceFactoryBean
 @PropertySource("classpath:application-test.properties")
 @ComponentScan(basePackages = arrayOf("io.mikeyglitz.identity.**"))
 @EnableLdapRepositories(basePackages = arrayOf("io.mikeyglitz.identity.repository"))
-@Profile("test")
-class TestConfig {
+@Profile("testIntegration")
+class TestLdapServerConfig {
     @Autowired
     private lateinit var environment: Environment
     @Autowired
