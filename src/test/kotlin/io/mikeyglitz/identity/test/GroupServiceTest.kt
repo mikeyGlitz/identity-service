@@ -31,7 +31,7 @@ class GroupServiceTest {
 
     @Test
     fun testFindGroup() {
-        val name = "joes"
+        val name = "johns"
         val group = groupService.findGroup(name)
         expect(group).to.not.be.`null`
         expect(group!!.name).to.equal(name)
