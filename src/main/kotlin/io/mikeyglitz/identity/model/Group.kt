@@ -20,7 +20,7 @@ class Group() {
     lateinit var id: Name
 
     @Attribute(name = "cn")
-    @DnAttribute(value= "cn", index = 1)
+    @DnAttribute(value = "cn", index = 1)
     lateinit var name: String
     @Attribute(name = "description")
     lateinit var description: String

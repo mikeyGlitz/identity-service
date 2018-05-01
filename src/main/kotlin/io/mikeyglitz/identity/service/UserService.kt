@@ -11,14 +11,15 @@ import org.springframework.stereotype.Service
  * A service for accessing and manipulating information for users
  */
 @Service
-class UserService(@Autowired userRepository: UserRepository): UserRepository by userRepository{
+class UserService (@Autowired userRepository: UserRepository) : UserRepository by userRepository {
     /**
      * Checks to see if the user has previously signed up
      * @param username The name of the user to log in
      * @param password The user's password
      * @return true if  the user was found, false if the user wasn't
      */
-    fun authed(username: String, password: String): Boolean = findByUsernameAndPassword(username, password) != null
+    fun authed(username: String, password: String): Boolean =
+            findByUsernameAndPassword(username, password) != null
 
     /**
      * Creates a new user and adds the user to the LDAP directory
@@ -26,7 +27,8 @@ class UserService(@Autowired userRepository: UserRepository): UserRepository by 
      * from the request body
      */
     fun create(input: UserCreationInput): User {
-        val user = User(input.username!!, input.password!!, input.firstName!!, input.lastName!!, input.email!!)
+        val user =
+                User(input.username!!, input.password!!, input.firstName!!, input.lastName!!, input.email!!)
         return save(user)
     }
 

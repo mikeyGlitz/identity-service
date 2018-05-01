@@ -27,7 +27,6 @@ class GroupServiceTest {
     @Autowired
     private lateinit var groupService: GroupService
 
-
     @Test
     fun testFindGroup() {
         val name = "johns"
@@ -68,7 +67,7 @@ class GroupServiceTest {
     fun removeGroup() {
         val groupName = "heroes"
         val user = userService.findByUsername("jdoe")
-         groupService.createGroup(groupName, user!!)
+        groupService.createGroup(groupName, user!!)
 
         val createdGroup = groupService.findGroup(groupName)
         groupService.deleteGroup(groupName)

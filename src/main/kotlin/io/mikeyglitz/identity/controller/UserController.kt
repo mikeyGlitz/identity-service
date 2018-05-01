@@ -5,7 +5,12 @@ import io.mikeyglitz.identity.model.UserCreationInput
 import io.mikeyglitz.identity.model.UserDisplay
 import io.mikeyglitz.identity.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
 import javax.validation.Valid
 
 /**
@@ -21,7 +26,7 @@ class UserController {
     @GetMapping("/{id}")
     fun getUser(@PathVariable("id") username: String): UserDisplay {
         val user = userService.findByUsername(username)
-        user?: throw ResourceNotFoundException()
+        user ?: throw ResourceNotFoundException()
         return user!!.toDisplay()
     }
 
