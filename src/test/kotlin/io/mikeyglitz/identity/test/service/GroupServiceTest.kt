@@ -1,11 +1,10 @@
-package io.mikeyglitz.identity.test
+package io.mikeyglitz.identity.test.service
 
 import com.winterbe.expekt.expect
 import io.mikeyglitz.identity.config.TestLdapServerConfig
+import io.mikeyglitz.identity.model.UserCreationInput
 import io.mikeyglitz.identity.service.GroupService
 import io.mikeyglitz.identity.service.UserService
-import org.junit.Before
-import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -46,7 +45,7 @@ class GroupServiceTest {
 
     @Test
     fun testAddValidUserToGroup() {
-        userService.create("jjacob", "test", "John", "Jacob", "jjacob@example.com")
+        userService.create(UserCreationInput("jjacob", "test", "John", "Jacob", "jjacob@example.com"))
         val name = "johns"
         groupService.addUserToGroup("jjacob", name)
         val group = groupService.findGroup(name)
@@ -57,8 +56,7 @@ class GroupServiceTest {
     @Test
     fun testCreateGroup() {
         val groupName = "tyrants"
-        val foundUsers= userService.search("jdoe")
-        val user = foundUsers[0]
+        val user = userService.findByUsername("jdoe")
         groupService.createGroup(groupName, user!!)
 
         val group = groupService.findGroup(groupName)
@@ -69,8 +67,7 @@ class GroupServiceTest {
     @Test
     fun removeGroup() {
         val groupName = "heroes"
-        val foundUsers= userService.search("jdoe")
-        val user = foundUsers[0]
+        val user = userService.findByUsername("jdoe")
          groupService.createGroup(groupName, user!!)
 
         val createdGroup = groupService.findGroup(groupName)

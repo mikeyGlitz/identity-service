@@ -1,6 +1,8 @@
 package io.mikeyglitz.identity.service
 
 import io.mikeyglitz.identity.model.User
+import io.mikeyglitz.identity.model.UserCreationInput
+import io.mikeyglitz.identity.model.UserUpdateInput
 import io.mikeyglitz.identity.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -9,76 +11,39 @@ import org.springframework.stereotype.Service
  * A service for accessing and manipulating information for users
  */
 @Service
-class UserService {
+class UserService(@Autowired userRepository: UserRepository): UserRepository by userRepository{
     /**
-     * The user repository
+     * Checks to see if the user has previously signed up
+     * @param username The name of the user to log in
+     * @param password The user's password
+     * @return true if  the user was found, false if the user wasn't
      */
-    @Autowired
-    private lateinit var repository: UserRepository
-
-    /**
-     * A method which searches for user by username and password
-     * @param username The username to search for
-     * @param password The password to search for
-     * @return A boolean indicator to indicate whether the user was able to
-     * be found or not
-     */
-    fun authenticate(username: String, password: String): Boolean =
-        repository.findByUsernameAndPassword(username, password) != null
+    fun authed(username: String, password: String): Boolean = findByUsernameAndPassword(username, password) != null
 
     /**
      * Creates a new user and adds the user to the LDAP directory
-     * @param username The user's name
-     * @param password The user's password
-     * @param firstName The user's first name
-     * @param lastName The user's last name
-     * @param email The user's email address
+     * @param input An input argument whose fields correspond with the input types
+     * from the request body
      */
-    fun create(
-        username: String,
-        password: String,
-        firstName: String,
-        lastName: String,
-        email: String
-    ) {
-        val user = User(username, password, firstName, lastName, email)
-        repository.save(user)
+    fun create(input: UserCreationInput): User {
+        val user = User(input.username!!, input.password!!, input.firstName!!, input.lastName!!, input.email!!)
+        return save(user)
     }
 
     /**
      * Updates a user's information
-     * @param username The username to be updated
-     * @param password The password to set to the user's password
-     * @param firstName The user's new first name
-     * @param lastName The user's new last name
-     * @param email The user's new email address
+     * @param user The user to be updated
+     * @param input An input argument whose fields correspond with the input types
      */
-    fun update(
-        username: String,
-        password: String?,
-        firstName: String?,
-        lastName: String?,
-        email: String?
-    ) {
-        val user = repository.findByUsername(username)
-        if (user != null) {
-            if (password != null)
-                user.setPassword(password)
-            if (email != null)
-                user.email = email
-            if (firstName != null)
-                user.firstName = firstName
-            if (lastName != null)
-                user.lastName = lastName
-            repository.save(user)
-        }
+    fun update(user: User, input: UserUpdateInput): User {
+        if (input.password != null)
+            user.setPassword(input.password)
+        if (input.email != null)
+            user.email = input.email
+        if (input.firstName != null)
+            user.firstName = input.firstName
+        if (input.lastName != null)
+            user.lastName = input.lastName
+        return save(user)
     }
-
-    /**
-     * Performs a search for users by username
-     * This search will be case-insensitive and contain partial name matches
-     * @param name the name to search for
-     * @return a list of users, or an empty list if none were found
-     */
-    fun search(name: String?): List<User> = repository.findByUsernameLikeIgnoreCase(name?:"*")
 }
