@@ -103,5 +103,5 @@ class User() {
      * Best practices dictate that passwords are only to be used for authentication and should be only set
      * and compared on the server-side
      */
-    fun toDisplay(): UserDisplay = UserDisplay(username, email, firstName, lastName)
+    fun getDisplay(): UserDisplay = UserDisplay(username, email, firstName, lastName)
 }
