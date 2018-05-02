@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.2.40'
+    ext.kotlin_version = '1.2.41'
     ext.spek_version = '1.1.5'
     ext.apacheds_version = "1.5.5"
 
@@ -94,3 +94,12 @@ junitPlatform {
     // https://stackoverflow.com/questions/42717350/how-to-setup-jacoco-with-spek-in-a-multi-project
     enableStandardTestTask true
 }
+
+jacocoTestReport {
+    reports {
+        html.enabled = true
+        xml.enabled = true
+    }
+}
+
+test { finalizedBy jacocoTestReport }

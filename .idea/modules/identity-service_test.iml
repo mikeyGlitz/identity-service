@@ -54,10 +54,10 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="identity-service_main" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.40" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.41" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.spek:spek-junit-platform-engine:1.1.5" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.spek:spek-api:1.1.5" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.2.40" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.2.41" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-web:2.0.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.data:spring-data-ldap:2.0.6.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.ldap:spring-ldap-test:2.3.2.RELEASE" level="project" />
@@ -89,8 +89,8 @@
     <orderEntry type="library" name="Gradle: org.apache.directory.server:apacheds-jdbm:1.5.5" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.directory.server:apacheds-core-avl:1.5.5" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.directory.shared:shared-ldap:0.9.15" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.40" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.40" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.41" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.41" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-json:2.0.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter:2.0.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-tomcat:2.0.1.RELEASE" level="project" />

@@ -37,9 +37,6 @@ data class UserCreationInput(
  */
 data class UserUpdateInput(
     @field: NotEmpty
-    var username: String?,
-
-    @field: NotEmpty
     @field: Size(min = 8)
     val password: String?,
 

@@ -40,7 +40,7 @@ class UserServiceTest {
 
     @Test
     fun authenticateUserValidPassword() {
-        val username = "jdoe"
+        val username = "jblow"
         val password = "secret"
         val authed = userService.authed(username, password)
         expect(authed).to.be.`true`
@@ -59,9 +59,9 @@ class UserServiceTest {
         val username = "ljenkins"
         val password = "TEST"
         val user = userService.create(UserCreationInput(username, password, "ljenkins@blizzard.com", "Leeroy", "Jenkins"))
-        expect (user).to.not.be.`null`
-        expect (user.username).to.equal(username)
-        expect (user.id).to.not.be.`null`
+        expect(user).to.not.be.`null`
+        expect(user.username).to.equal(username)
+        expect(user.id).to.not.be.`null`
     }
 
     @Test
@@ -69,7 +69,7 @@ class UserServiceTest {
         val username = "jdoe"
         val email = "john.doe@example.com"
         val matchingUser = userService.findByUsername(username)
-        val user = userService.update(matchingUser!!, UserUpdateInput(username, null, email, null, null))
+        val user = userService.update(matchingUser!!, UserUpdateInput(username, email, null, null))
 
         expect(user.username).to.equal(username)
         expect(user.email).to.equal(email)

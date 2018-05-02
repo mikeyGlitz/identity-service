@@ -83,7 +83,7 @@ class GroupService {
      */
     fun deleteGroup(name: String) {
         val group = groupRepository.findByName(name)
-        groupRepository.delete(group)
+        groupRepository.delete(group!!)
     }
 
     /**
